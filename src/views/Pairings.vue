@@ -2,6 +2,8 @@
   <div class="firstcharacterlist">
     <h1>Choose a Character</h1>
         <router-link :to="{ name: 'Second', params: { id: 'byleth_f' }}" tag="button">Byleth F</router-link>
+        <router-link :to="{ name: 'Second', params: { id: 'constance' }}" tag="button">Constance</router-link>
+        <router-link :to="{ name: 'Second', params: { id: 'dimitri' }}" tag="button">Dimitri</router-link>
         <router-link :to="{ name: 'Second', params: { id: 'yuri' }}" tag="button">Yuri</router-link>
   </div>
 </template>
