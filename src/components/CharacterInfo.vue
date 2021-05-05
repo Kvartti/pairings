@@ -6,6 +6,8 @@
           <div v-case="'byleth_f'">
               <h2>BYLETH (F)</h2>
                 <router-link :to="{ name: 'Result', params: { name: 'byleth_f', second: 'dimitri' }}" tag="button">Dimitri</router-link>
+                <router-link :to="{ name: 'Result', params: { name: 'byleth_f', second: 'dorothea' }}" tag="button">Dorothea</router-link>
+                <router-link :to="{ name: 'Result', params: { name: 'byleth_f', second: 'ferdinand' }}" tag="button">Ferdinand</router-link>
                 <router-link :to="{ name: 'Result', params: { name: 'byleth_f', second: 'yuri' }}" tag="button">Yuri</router-link>
           </div>
             
@@ -19,6 +21,20 @@
           <div v-case="'dimitri'">
               <h2>DIMITRI</h2>
                 <router-link :to="{ name: 'Result', params: { name: 'dimitri', second: 'byleth_f' }}" tag="button">Byleth (F)</router-link>
+          </div>
+            
+        <!-- DOROTHEA POSSIBLE PAIRINGS -->
+          <div v-case="'dorothea'">
+              <h2>DOROTHEA</h2>
+                <router-link :to="{ name: 'Result', params: { name: 'dorothea', second: 'byleth_f' }}" tag="button">Byleth (F)</router-link>
+                <router-link :to="{ name: 'Result', params: { name: 'dorothea', second: 'ferdinand' }}" tag="button">Ferdinand</router-link>
+          </div>
+            
+        <!-- FERDINAND POSSIBLE PAIRINGS -->
+          <div v-case="'ferdinand'">
+              <h2>FERDINAND</h2>
+                <router-link :to="{ name: 'Result', params: { name: 'ferdinand', second: 'byleth_f' }}" tag="button">Byleth (F)</router-link>
+                <router-link :to="{ name: 'Result', params: { name: 'ferdinand', second: 'dorothea' }}" tag="button">Dorothea</router-link>
           </div>
             
         <!-- YURI POSSIBLE PAIRINGS -->

@@ -1,7 +1,7 @@
 <template>
   <div class="pairmain">
-    <h1>Result</h1>
-                <ResultInfo/>
+    <h1>Ending</h1>
+        <ResultInfo/>
   </div>
 </template>
 
@@ -31,6 +31,10 @@ import ResultInfo from '../components/ResultInfo.vue'
 </script>
 
 <style scoped>
+.pairmain {
+    padding-top: 10px;
+}
+    
 .pairmain a:link, a:visited {
   color: #2c3e50;
 }
