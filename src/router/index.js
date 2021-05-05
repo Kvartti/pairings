@@ -7,14 +7,17 @@ import SecondCharacter from '../views/SecondTemplate.vue'
 import Result from '../views/Result.vue'
 
 const routes = [
-  {
+  /*{
     path: '/home',
     name: 'Home',
     component: () => import('../views/Home.vue')
-  },{
+  },*/{
     path: '/',
     name: 'Pairings',
-    component: () => import('../views/Pairings.vue')
+    component: () => import('../views/Pairings.vue'),    
+      meta: {
+        title: 'Dashboard'
+      },
   },{
     path: '/:id',
     name: 'Second',

@@ -1,6 +1,6 @@
 <template>
   <div class="pairmain">
-    <h1>Choose the Second Character</h1>
+    <h1>Choose a Second Character</h1>
                 <CharacterInfo/>
   </div>
 </template>
@@ -21,6 +21,10 @@ import CharacterInfo from '../components/CharacterInfo.vue'
 </script>
 
 <style scoped>
+.pairmain {
+    padding-top: 10px;
+}
+    
 .pairmain a:link, a:visited {
   color: #2c3e50;
 }
