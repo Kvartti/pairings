@@ -30,7 +30,7 @@ import ResultInfo from '../components/ResultInfo.vue'
 };
 </script>
 
-<style>
+<style scoped>
 .pairmain a:link, a:visited {
   color: #2c3e50;
 }

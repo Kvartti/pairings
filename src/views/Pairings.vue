@@ -1,30 +1,8 @@
 <template>
-  <div class="pairmain">
+  <div class="firstcharacterlist">
     <h1>Choose a Character</h1>
-    <p>Tää on se etusivu :oc</p>
-    <p>hue hue hue hue :Dc</p>
-    <b><router-link :to="{ name: 'Second', params: { id: '22' }}" v-on:click.native="$store.commit('incrementBy', '22')">Toimisko tämä (22)</router-link></b>
-      <br/>
-    <b><router-link :to="{ name: 'Second', params: { id: 999 }}" v-on:click.native="$store.commit('incrementBy', '999')">Toimisko tämä (999)</router-link></b>
-      <br/>
-      <br/>
-    <b><router-link :to="{ name: 'Second', params: { id: '999' }}" v-on:click.native="$store.commit('firstCharacterID', '999')">Toimisko tämä (999)</router-link></b>
-    <!--<router-link to="/1">Ykkönen</router-link><br>
-    <router-link to="/katariina">Katariina</router-link>
-      <br/>
-    <router-link :to="{ name: 'Testi', params: { id: 22 }}" name="chooseID" @change="chooseID">User</router-link>
-      <br/>
-      <br/>
-    <router-link to="/1" @click="firstCharacter('12')">Add one</router-link>
-      <br/>
-      <br/>
-    <router-link to="/" v-on:click.native="$store.commit('incrementBy', 'mmmm')" >Tämä toimii</router-link>
-      <br/>
-    <a @click="$store.commit('incrementBy', 'mmmm')">Tämä(kin) toimii</a>
-      <p>{{ $store.getters.id }}</p>
-      <p>{{ $store.getters.numero }}</p> firstCharacterID-->
-      <br/>
-      <br/>
+        <router-link :to="{ name: 'Second', params: { id: 'byleth_f' }}" tag="button">Byleth F</router-link>
+        <router-link :to="{ name: 'Second', params: { id: 'yuri' }}" tag="button">Yuri</router-link>
   </div>
 </template>
 
@@ -37,34 +15,26 @@
         numero: '',
       }
     },
-      
-  /*  methods: {
-    chooseID: function(event) {
-      this.$store.commit('chooseID', event.target.value)
-    },
-    firstCharacter: function(numero) {
-        this.$store.commit('firstCharacter', numero.target.value)
-    }
-  }*/
 }
 </script>
 
 
-<style>
-.pairmain a:link, a:visited {
-  color: #2c3e50;
+<style scoped>        
+.firstcharacterlist button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  margin: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  float: center;
 }
 
-.pairmain a:hover, a:active {
-  color: red;
-  text-decoration: none;
-}
-.pairmain a:link, a:visited {
-  color: #2c3e50;
-}
-
-.pairmain a:hover, a:active {
-  color: red;
-  text-decoration: none;
+.firstcharacterlist button:hover {
+  background-color: #3e8e41;
 }
 </style>

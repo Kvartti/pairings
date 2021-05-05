@@ -1,26 +1,7 @@
 <template>
   <div class="pairmain">
     <h1>Choose the Second Character</h1>
-    <!-- <p>hue hue hue hue :Dc</p>
-    <p>hue hue hue hue :Dc</p>
-    <p>hue hue hue hue :Dc</p>
-    <p>hue hue hue hue :Dc</p>
-
-    <p>{{this.$route.params.id}}</p> -->
-      
-      <!--    <router-link to="/">Home</router-link>
-      <br>
-      <br>
-    <router-link to="/1">Ykkönen</router-link><br>
-    <router-link to="/katariina">Katariina</router-link> -->
                 <CharacterInfo/>
-      
-
-    <p>{{this.$route.params.id}}</p> 
-
-    <p>{{this.$route.params.id}}</p> 
-
-    <p>{{this.$route.params.id}}</p> 
   </div>
 </template>
 
@@ -39,7 +20,7 @@ import CharacterInfo from '../components/CharacterInfo.vue'
 };
 </script>
 
-<style>
+<style scoped>
 .pairmain a:link, a:visited {
   color: #2c3e50;
 }

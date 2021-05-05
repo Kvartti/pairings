@@ -8,11 +8,11 @@ import Result from '../views/Result.vue'
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'Home',
     component: () => import('../views/Home.vue')
   },{
-    path: '/pairings',
+    path: '/',
     name: 'Pairings',
     component: () => import('../views/Pairings.vue')
   },{

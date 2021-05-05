@@ -20,7 +20,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .about a:link, a:visited {
   color: #2c3e50;
 }
