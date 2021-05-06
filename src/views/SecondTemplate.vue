@@ -11,45 +11,37 @@ import CharacterInfo from '../components/CharacterInfo.vue'
   export default {
     data() {
       return {
-        //characterID: this.$route.params.id,
         firstCharacter: this.$route.params.id,
         characters: this.characters,
-        //pairList: this.$route.params.id + '.pairs',
-        //i: this.props.i,
         testi: '',
         id: this.$store.getters.storeid,
-       /*   props: {
-              i: 1
-          },*/
       }
     },
       components: {
         CharacterInfo
       },       
       mounted: function(){
-         console.log(this.firstCharacter);
-         //console.log(this.i);
-         //console.log(this.characters);
-         //console.log(this.characters[0].code);
-         //console.log(this.characters[1].code);
-         console.log(this.testi);
-         this.testi = 'hi'
-         console.log(this.testi);
-         console.log(this.id);
-         console.log(this.id);
-         this.setID();
-       /* while (this.firstCharacter !== this.characters[1].code) {
-             this.i++;
-             console.log(':(');
-            }*/
+         this.setID(0);
       },
       methods: {
-          setID: function(){
-              console.log('SETid MENI LÄPI :D');
-                //this.$store.commit.storeid = 15;
-                this.$store.commit("rightCharacter");
-              console.log(this.$store.getters.storeid);
-              //console.log(this.)
+          setID: function(counter){
+              console.log("0:" +  this.$store.getters.characters[0].code);
+              console.log("1:" +  this.$store.getters.characters[1].code);
+              console.log("2:" +  this.$store.getters.characters[2].code);
+              
+              console.log(this.$store.getters.characters[counter].code + " = "+this.firstCharacter);
+                
+              this.$store.commit('nollaa', '0');
+              
+              while (this.$store.getters.characters[counter].code !== this.firstCharacter) {
+                  console.log('counter: ' + counter);
+                  console.log('storeid: ' + this.$store.getters.storeid);
+                  this.$store.commit("rightCharacter");
+                  counter++;
+              }
+                  console.log('after while:')
+                  console.log('counter: ' + counter);
+                  console.log('storeid: ' + this.$store.getters.storeid);
           }
       }
 };

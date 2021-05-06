@@ -10,6 +10,41 @@ export default new Vuex.Store({
      numero: '0',
      count: 15,
      storeid: 0,
+     i: 0,
+     
+    //KOLMOS KOITOS
+          characters: [{
+              //BYLETH (F)
+              code: 'byleth_f', 
+              name: 'Byleth (F)',
+              pairs: [{
+                code: 'dimitri',
+                name: 'Dimitri'
+              },{
+                code: 'ferdinand',
+                name: 'Ferdinand'
+              },{
+                code: 'yuri',
+                name: 'Yuri'
+              }]
+          },{
+              //DIMITRI
+              code: 'dimitri', 
+              name: 'Dimitri',
+              pairs: [{
+                code: 'byleth_f',
+                name: 'Byleth (F)'
+              }]
+          },{
+              //DIMITRI
+              code: 'yuri', 
+              name: 'Yuri',
+              pairs: [{
+                code: 'byleth_f',
+                name: 'Byleth (F)'
+              }]
+          },
+        ],
  },
     
     
@@ -24,6 +59,9 @@ export default new Vuex.Store({
         state.numero = n;
     },
     rightCharacter: (state) => state.storeid++,
+    nollaa (state, n) {
+        state.storeid = n;
+    },
  },
     
  getters: {
@@ -32,6 +70,8 @@ export default new Vuex.Store({
      numero: state => state.numero,
      count: state => state.count,
      storeid: state => state.storeid,
+     characters: state => state.characters,
+     i: state => state.i,
  },
     
  methods: { 
