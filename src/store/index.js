@@ -7,8 +7,10 @@ export default new Vuex.Store({
  state: {
      //numero: '0',
      //count: 15,
+     pairingname: '',
      storeid: 0,
      secondid: 0,
+     storyid: 0,
      i: 0,
      
     //YHTEYDET ARRAY
@@ -92,6 +94,16 @@ export default new Vuex.Store({
               }]
           },
         ],
+     pairings: [{
+        code: 'byleth_fdimitri',
+        ending: 'Paired with the end of the war, the joyous marriage of Byleth, the newly-appointed archbishop, and Dimitri, the newly-crowned king of Faerghus, gave the people of Fodlan much to celebrate. The two were devoted to improving life for the people and to seeking greater wisdom in order to reform the government and the church from the inside out. As leaders of church and state respectively, at times they engaged in heated debate. Even still, when enjoying a long horse ride or a quiet evening, they were not as the world saw them, but rather two adoring spouses, desperately in love. They remained as such for the rest of their days.'
+    },{
+        code: 'constanceyuri',
+        ending: "After the war, Constance devoted herself to her magical research. Her unorthodox methods allowed her to make great strides, which earned her acclaim and eventually enabled her to restore her noble house. Afterward, almost as if to spite her detractors, she married Yuri. The pair made a happy, if unconventional, couple, as the husband frequently ventured away for months on end. In the long years of their marriage, however, Constance laughed off any concerns-she was known to say that Yuri always knew how to find his way home. Many decades later, he passed away in bed alongside his beloved wife."
+    },{
+        code: 'dorotheaferdinand',
+        ending: "After officially becoming the new Duke Aegir, Ferdinand set about reforming his territory. Thanks to the wisdom of his wife, Dorothea, Ferdinand's policies were of massive benefit to the commonfolk and brought about a swift recovery. In recognition of this achievement, he was called upon to help govern to Fodlan at large. Though the work of reforming the entire nation kept him very busy, he always managed to find time for Dorothea. It is said that their children filled their loving household with beautiful music ever after."
+    }]
  },
     
     
@@ -107,11 +119,19 @@ export default new Vuex.Store({
     },
     rightCharacter: (state) => state.storeid++,
     secondCharacter: (state) => state.secondid++,
+    storyEnding: (state) => state.storyid++,
+     
+    nimeaPairing (state, n) {
+        state.pairingname = n;
+    },
     nollaa (state, n) {
         state.storeid = n;
     },
     nollaaToinen (state, n) {
         state.secondid = n;
+    },
+    nollaaStory (state, n) {
+        state.storyid = n;
     },
  },
     
@@ -120,7 +140,10 @@ export default new Vuex.Store({
      //count: state => state.count,
      storeid: state => state.storeid,
      secondid: state => state.secondid,
+     storyid: state => state.storyid,
      characters: state => state.characters,
+     pairings: state => state.pairings,
+     pairingname: state => state.pairingname,
      i: state => state.i,
  },
     

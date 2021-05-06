@@ -7,6 +7,9 @@
         <router-link :to="{ name: 'Second', params: { id: 'dorothea' }}" tag="button">Dorothea</router-link>
         <router-link :to="{ name: 'Second', params: { id: 'ferdinand' }}" tag="button">Ferdinand</router-link>
         <router-link :to="{ name: 'Second', params: { id: 'yuri' }}" tag="button">Yuri</router-link>
+      <br/>
+      <br/>
+      {{this.$store.getters.pairings}}
   </div>
 </template>
 
