@@ -12,21 +12,38 @@ import ResultInfo from '../components/ResultInfo.vue'
     data() {
       return {
         characterID: this.$route.params.name,
+        secondID: this.$route.params.second,
       }
     },
       components: {
         ResultInfo
-      },  
-    props: {
-        name: {
-          type: String,
-          required: true
-        },
-        second: {
-          type: String,
-          required: true
-        },
-  }
+      },      
+      mounted: function(){
+         this.setID(0);
+         this.setSecondID(0);
+      },
+      methods: {
+          setID: function(counter){
+                
+              this.$store.commit('nollaa', '0');
+              
+              while (this.$store.getters.characters[counter].code !== this.characterID) {
+                  this.$store.commit("rightCharacter");
+                  counter++;
+              }
+          },
+          setSecondID: function(kounter){
+              
+              this.$store.commit('nollaaToinen', '0');
+            console.log(this.$store.getters.characters[this.$store.getters.storeid].code);
+            console.log(this.$store.getters.characters[this.$store.getters.storeid].pairs[kounter].name);
+              
+              while (this.$store.getters.characters[this.$store.getters.storeid].pairs[kounter].code !== this.secondID) {
+                  this.$store.commit("secondCharacter");
+                  kounter++;
+              } console.log(this.$store.getters.characters[this.$store.getters.storeid].pairs[kounter].name);
+          }
+      },
 };
 </script>
 
