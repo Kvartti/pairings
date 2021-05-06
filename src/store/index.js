@@ -5,10 +5,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
  state: {
-     id: '1',
-     chosencharacter: "katariina",
+     //id: '1',
+     //chosencharacter: "katariina",
      numero: '0',
      count: 15,
+     storeid: 0,
  },
     
     
@@ -21,14 +22,16 @@ export default new Vuex.Store({
     },    
     firstCharacterID (state, n) {
         state.numero = n;
-    }
+    },
+    rightCharacter: (state) => state.storeid++,
  },
     
  getters: {
-     id: state => state.id,
-     chosencharacter: state => state.chosencharacter,
+     //id: state => state.id,
+     //chosencharacter: state => state.chosencharacter,
      numero: state => state.numero,
      count: state => state.count,
+     storeid: state => state.storeid,
  },
     
  methods: { 

@@ -50,17 +50,174 @@
               <p>Tätä hahmoa ei löytynyt</p>
           </div>
         </div>
+        
+        <h1>Uudistettu versio:</h1>
+            <h2>{{this.$route.params.id}}</h2>
+            <h2>{{this.byleth_f.name}}</h2>
+                <router-link :to="{ name: 'Result', params: { name: firstCharacter, second: this.byleth_f.pairs.dimitri.id }}" tag="button">{{this.byleth_f.pairs.dimitri.name}}</router-link>
+        
+            <p>{{this.byleth_f.pairs.dimitri}}</p>
+            {{ byleth_f.pairs }}
+        <br/>
+        <br/>
+        <br/>
+        :o
+        <div id="data">
+            <router-link :to="{ name: 'Result', params: { name: firstCharacter, second: value.id }}" tag="button" 
+            v-for="(value, index) in this.byleth_f.pairs" v-bind:key="index">{{value.name}}</router-link>
+
+            <br/>
+            <br/>
+            
+<!--            {{ firstCharacter }}
+            <br/>
+            {{ byleth_f.name }}
+            <br/>
+            {{ firstCharacter.name }}
+            <br/>
+            {{ pairList }}
+            <br/>
+            <br/>
+            {{ byleth_f.pairs}}-->
+            <br/><br/>
+            {{ pairList }}
+            <br/>
+            {{this.firstCharacter}}
+            <br/>
+            {{pairList}}
+            <br/>
+            {{this.byleth_f.pairs.yuri}}
+            <br/>
+            {{this.byleth_f.array}}
+            <br/>
+            {{this.byleth_f.array[0]}}
+            {{this.byleth_f.array[0].name}}
+            <br/>
+            <br/>
+            {{this.characters[0].pairings}}
+            
+            <h1>KOLMAS</h1>
+           <router-link :to="{ name: 'Result', params: { name: firstCharacter, second: value.code }}" tag="button" 
+            v-for="(value, index) in this.characters[this.i].pairs" v-bind:key="index">{{value.name}}</router-link>
+            
+           <!--  <p>{{ this.characters}}</p>
+            <p>{{ this.characters[i].code}}</p>
+            <p>{{ this.characters[i].pairs}}</p>
+            <p>{{ this.firstCharacter }} {{ this.characters[i].code }}</p>
+            <p>{{ this.characters[i].code }}</p>
+            <p>{{ this.i }} :D</p>
+            <p>{{ this.e }} :o</p>
+            <p>{{ firstCharacter }} = {{ this.characters[i].code }}</p> -->
+            <p>{{this.i}}</p>
+            <p>{{this.$parent.i}}</p>
+            <p>{{this.$store.getters.storeid}}</p>
+        </div>
     </div>
 </template>
 
 <script>
 export default {
   name: 'CharacterInfo',
+  //el: '#data',
+    data() {
+      return {
+          firstCharacter: this.$route.params.id,
+          pairList: this.$route.params.id + '.pairs',
+          i: this.$store.getters.storeid,
+          
+        /* props: {
+              i: this.props.i
+          },*/
+          
+      /*  while (firstCharacter !== this.characters[i].code) {
+              
+              i++;
+            }, */
+          
+          //KOLMOS KOITOS
+          characters: [{
+              //BYLETH (F)
+              code: 'byleth_f', 
+              name: 'Byleth (F)',
+              pairs: [{
+                code: 'dimitri',
+                name: 'Dimitri'
+              },{
+                code: 'ferdinand',
+                name: 'Ferdinand'
+              },{
+                code: 'yuri',
+                name: 'Yuri'
+              }]
+          },{
+              //DIMITRI
+              code: 'dimitri', 
+              name: 'Dimitri',
+              pairs: [{
+                code: 'byleth_f',
+                name: 'Byleth (F)'
+              }]
+          },
+        ],
+          /*mounted(): {
+              for (this.i; this.firstCharacter !== this.characters[this.i].code; this.i+1) {
+                  console.log("this.i");
+                }
+          },
+          
+          
+          methods: {
+                onWindowLoad: function() {
+                    var e = this.i;
+                    
+                    while (this.firstCharacter !== this.characters[e].code) {
+                      console.log(e);
+                      e++;
+                      //this.i = this.e;
+                      this.$set(this.i, this.e)  
+                    }
+                },
+            },
+          mounted: {
+              onWindowLoad()
+          },
+       mounted: function(){
+             while (this.firstCharacter !== this.characters[i].code) {
+              
+              i++;
+            }
+        },*/
+          
+          //KAKKOS KOITOS
+          byleth_f: {
+            name: 'Byleth (F)',
+            array: [{name : 'omena', id: 'ei omena'},  {name: 'päärynä', id: 'ei päärynä'}],
+            pairs: {
+                dimitri: {
+                    id: 'dimitri',
+                    name: 'Dimitri',
+                },
+                dorothea: {
+                    id: 'dorothea',
+                    name: 'Dorothea',
+                },
+                ferdinand: {
+                    id: 'ferdinand',
+                    name: 'Ferdinand',
+                },
+                yuri: {
+                    id: 'yuri',
+                    name: 'Yuri',
+                }
+            }
+        },
+      }
+    }    
 }
 </script>
 
 <style scoped>        
-.firstcharacterlist button {
+#data button {
   background-color: #4CAF50; /* Green */
   border: none;
   color: white;
@@ -74,7 +231,7 @@ export default {
   float: center;
 }
 
-.firstcharacterlist button:hover {
+#data button:hover {
   background-color: #3e8e41;
 }
 .backbutton {
