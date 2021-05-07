@@ -5,6 +5,7 @@ Vue.use(VueRouter)
 
 import SecondCharacter from '../views/SecondTemplate.vue'
 import Result from '../views/Result.vue'
+import AddMore from '../views/AddMore.vue'
 
 const routes = [
   /*{
@@ -18,6 +19,10 @@ const routes = [
       meta: {
         title: 'Dashboard'
       },
+  },{
+    path: '/addmore',
+    name: 'AddMore',
+    component: AddMore,
   },{
     path: '/:id',
     name: 'Second',

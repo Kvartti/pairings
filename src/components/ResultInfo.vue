@@ -3,15 +3,6 @@
         <router-link :to="{ name: 'Second', params: { id: this.$route.params.name }}" tag="button" class="backbutton">Back</router-link>
         
         <div v-if="(this.$store.getters.characters[this.$store.getters.storeid].code == this.$route.params.name) && (this.$store.getters.characters[this.$store.getters.storeid].pairs[this.$store.getters.secondid].code == this.$route.params.second)">
-            <!-- <h2>{{this.$store.getters.characters[this.$store.getters.storeid].name}} & {{this.$store.getters.characters[this.$store.getters.storeid].pairs[this.$store.getters.secondid].name}}</h2>
-            <p>{{this.$store.getters.characters[this.$store.getters.storeid].pairs[this.$store.getters.secondid].ending}}</p> -->
-            
-         <!--   <h2>{{this.$store.getters.characters[this.$store.getters.storeid].name}} & {{this.$store.getters.characters[this.$store.getters.storeid].pairs[this.$store.getters.secondid].name}}</h2>
-            <p>{{this.$store.getters.pairings[this.$store.getters.storyid].ending}}</p>
-            <p>{{this.$store.getters.storyid}}</p>
-            <p>{{this.$store.getters.pairings[this.$store.getters.storyid]}}</p>
-            
-            <p>{{this.$store.getters.pairingname}}</p>-->
             <h2>{{this.$store.getters.characters[this.$store.getters.storeid].name}} & {{this.$store.getters.characters[this.$store.getters.storeid].pairs[this.$store.getters.secondid].name}}</h2>
             <p>{{this.$store.getters.pairings[this.$store.getters.storyid].ending}}</p>
             
@@ -84,6 +75,7 @@ export default {
 <style>
 .result-outer {
     margin: 0px 50px;
+    padding-bottom: 20px;
 }
 
 .backbutton {
