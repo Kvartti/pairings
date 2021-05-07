@@ -14,6 +14,9 @@ export default new Vuex.Store({
      i: 0,
      addpairindex: 0,
      
+     formalnameOne: '',  
+     formalnameTwo: '',  
+     
     //YHTEYDET ARRAY
           characters: [{
               //ANNETTE
@@ -183,9 +186,15 @@ export default new Vuex.Store({
     ADD_PAIR_INDEX(state, e){
         state.addpairindex = e;
     },
-    ADD_PAIR(state, pairadder){             
-       console.log(state.characters[this.addpairindex].pairs); state.characters[this.addpairindex].pairs.push(pairadder);
-    }
+    ADD_PAIR(state, pairadder){                         //state.characters[this.addpairindex].pairs.push(pairadder);
+    state.characters[state.addpairindex].pairs.push(pairadder);
+    },
+    setFormalOne(state, formal){
+        state.formalnameOne = formal;
+    },
+    setFormalTwo(state, formal){
+        state.formalnameTwo = formal;
+    },
  },
     
  getters: {
@@ -195,9 +204,11 @@ export default new Vuex.Store({
      secondid: state => state.secondid,
      storyid: state => state.storyid,
      characters: state => state.characters,
-     pairs: state => state.characters.pairs,
+     //pairs: state => state.characters.pairs,
      
      addpairindex: state => state.addpairindex,
+     formalnameOne: state => state.formalnameOne,  
+     formalnameTwo: state => state.formalnameTwo,
      
      pairings: state => state.pairings,
      pairingname: state => state.pairingname,

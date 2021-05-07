@@ -4,7 +4,7 @@
         <router-link :to="{ name: 'Pairings'}" tag="button" class="backbutton">Back</router-link>
     <h2>Add New Character</h2>
       <input v-model="charaname" placeholder="NAME" style="margin-right: 10px;">
-      <input v-model="characode" placeholder="CODE">
+      <input v-model="characode" placeholder="CODE"><br/>
       <button v-on:click="createCharacter()" style="margin-top: 5px;">Create New Character</button>
       
     <h2>Add Pairing</h2>
@@ -30,8 +30,10 @@
       <textarea v-model="ending" placeholder="add ending here"></textarea>
         <p style="white-space: pre-line;">{{ ending }}</p>
         <button v-on:click="realityCheck()">RealityCheck</button><br/>
-        <button v-on:click="doEverything()">DoEverything</button>
+      <button v-on:click="doEverything()">DoEverything</button><br/>
       <br/>
+      <p>{{this.$store.getters.characters[0].pairs}}</p>
+      <p>{{this.$store.getters.characters[7].pairs}}</p>
       <br/>
       <br/>
       <br/>
@@ -41,6 +43,7 @@
       <p>{{this.$store.getters.characters.length}}</p>
       <p>{{this.$store.getters.characters[0].code}}</p>
       <p>{{this.$store.getters.characters[0].pairs}}</p>
+        <button v-on:click="findProperNames()">test propernamefinder</button>
       <br/>
       <br/>
   </div>
@@ -55,6 +58,9 @@
         numero: '',
         selectedOne: '',
         selectedTwo: '',
+        formalnameOne: '',  
+        formalnameTwo: '',  
+          
         pairingCode: '',
         ending: '',
         
@@ -138,36 +144,64 @@
                                   
                  //personal data
                  var e = 0;
+                 //var counter = 0;
                  
                  for (e = 0; e < this.$store.getters.characters.length; e++){
                      console.log(e + "." + this.selectedOne + " = " + this.$store.getters.characters[e].code);
-                     
+                     this.findProperNamesOne();
+                     this.findProperNamesTwo();
+                    
+                     //EKAN TYYPPIN                  
                      if (this.selectedOne == this.$store.getters.characters[e].code) {
                          console.log("SAME HAT! " + e)
                          
                          this.$store.commit('ADD_PAIR_INDEX', e);
-                        //console.log(this.$store.getters.addpairindex);
-                        //console.log(this.$store.getters.characters[this.$store.getters.addpairindex].pairs);
+                         this.$store.commit('ADD_PAIR', {code: this.selectedTwo, name: this.$store.getters.formalnameTwo});
+                     }                          
+                     //TOKAN TYYPIN
+                     else if (this.selectedTwo == this.$store.getters.characters[e].code) {
+                         console.log("SAME HAT! " + e)
                          
-                         this.$store.commit('ADD_PAIR', {code: this.selectedOne, name: 'nameh'});
-                         //this.$store.commit('ADD_PAIR', {code: this.selectedOne, name: this.selectedOne}, e);
-                     }
+                         this.$store.commit('ADD_PAIR_INDEX', e);
+                         this.$store.commit('ADD_PAIR', {code: this.selectedOne, name: this.$store.getters.formalnameOne});
+                     } 
                  }
-                 
-            /*     var e = 0;
-                 for (e = 0; e < this.$store.getters.characters.length; e++) {
-                    if (this.selectedOne == this.$store.getters.characters[e].code)
-                        this.$store.commit('ADD_PAIR', {code: this.selectedOne, name: 'namehere' }, e);
-                 }*/
-                 
-                 
-                 console.log('Added');
+                 this.charapairSorter();
                  console.log(this.$store.getters.characters);
              } else {
                  console.log("Can't add the pair");
              }
               
-          }
+          },
+          
+          //CHARACTER PAIR SORTER
+          charapairSorter: function(){              
+            this.$store.getters.characters[this.$store.getters.addpairindex].pairs.sort(function(a, b){
+                if(a.code < b.code) { return -1; }
+                if(a.code > b.code) { return 1; }
+                return 0;
+            })
+          },
+          findProperNamesOne: function(){
+              var counter = 0;
+             
+              while (this.selectedOne !== this.$store.getters.characters[counter].code)  {
+                  console.log(counter + ": " + this.$store.getters.characters[counter].code);
+                  counter++;
+              }
+                  this.$store.commit('setFormalOne', this.$store.getters.characters[counter].name);
+                  console.log(this.$store.getters.formalnameOne);
+          },
+          findProperNamesTwo: function(){
+              var counter = 0;
+             
+              while (this.selectedTwo !== this.$store.getters.characters[counter].code)  {
+                  console.log(counter + ": " + this.$store.getters.characters[counter].code);
+                  counter++;
+              }
+                  this.$store.commit('setFormalTwo', this.$store.getters.characters[counter].name);
+                  console.log(this.$store.getters.formalnameTwo);
+          },
       },
 }
 </script>
