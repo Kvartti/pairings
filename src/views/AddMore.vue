@@ -3,12 +3,15 @@
     <h1>Make Additions</h1>
         <router-link :to="{ name: 'Pairings'}" tag="button" class="backbutton">Back</router-link>
     <h2>Add New Character</h2>
-      <input v-model="charaname" placeholder="NAME" style="margin-right: 10px;">
-      <input v-model="characode" placeholder="CODE"><br/>
-      <button v-on:click="createCharacter()" style="margin-top: 5px;">Create New Character</button>
+      <input v-model="charaname" placeholder="name" style="margin-right: 10px;">
+      <input v-model="characode" placeholder="code"><br/>
+      <button v-on:click="createCharacter()" style="margin-top: 5px;">Add New Character</button>
+      <div id="confirmChara"></div>
+      <br/>
+      <br/>
+      
       
     <h2>Add Pairing</h2>
-      
     <select v-model="selectedOne" style="margin-right: 5px;">
         <option v-for="(value, index) in this.$store.getters.characters" v-bind:key="index">
             {{ value.code }}
@@ -22,29 +25,10 @@
     </select>
       <br/>
       <br/>
-      <span>{{ selectedOne }} & {{selectedTwo}}</span><br/>
-        <button v-on:click="pairingName()">Get pairing name</button>
-      <p>{{this.pairingCode}}</p>
-      <br/>
-      <br/>
       <textarea v-model="ending" placeholder="add ending here"></textarea>
-        <p style="white-space: pre-line;">{{ ending }}</p>
-        <button v-on:click="realityCheck()">RealityCheck</button><br/>
-      <button v-on:click="doEverything()">DoEverything</button><br/>
       <br/>
-      <p>{{this.$store.getters.characters[0].pairs}}</p>
-      <p>{{this.$store.getters.characters[7].pairs}}</p>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <p>{{this.$store.getters.pairings[9]}}</p>
-        <button v-on:click="easySorter()">sort</button>
-      <p>{{this.$store.getters.characters.length}}</p>
-      <p>{{this.$store.getters.characters[0].code}}</p>
-      <p>{{this.$store.getters.characters[0].pairs}}</p>
-        <button v-on:click="findProperNames()">test propernamefinder</button>
-      <br/>
+      <button v-on:click="doEverything()">Add Ending</button><br/>
+      <div id="confirmEnding"></div>
       <br/>
   </div>
 </template>
@@ -71,10 +55,12 @@
       }
     },
       methods: {
+          //EVERYTHING TO ADD THE ENDING (for the button)
           doEverything: function(){
               this.pairingName();
               this.realityCheck();
               this.easySorter();
+              this.charapairSorter();
           },
           
           //SORT ENDINGS
@@ -84,7 +70,6 @@
                 if(a.code > b.code) { return 1; }
                 return 0;
             })
-                console.log(this.$store.getters.pairings);
           },
           
           //SORT CHARACTERS
@@ -96,41 +81,51 @@
             })
           },
           
-          //ADD A NEW CHARACTER
+          //ADD A NEW CHARACTER (for the button)
           createCharacter: function(){
-                 this.$store.commit('ADD_CHARACTER', {code: this.characode, name: this.charaname, pairs: []});
-                 this.charaSorter();
-                 console.log('New character ' + this.charaname + " was added.");
+                 var w = 0;
+                 var ready = true;
+              
+                 for (w = 0; w < this.$store.getters.characters.length; w++){
+                     if (this.characode == this.$store.getters.characters[w].code || this.charaname == this.$store.getters.characters[w].name){
+                         ready = false;
+                         console.log(ready);
+                     }
+                 }
+              
+                if (ready == true) {
+                    this.$store.commit('ADD_CHARACTER', {code: this.characode, name: this.charaname, pairs: []});
+                    this.charaSorter();
+                    this.confirmChara();
+                    console.log('New character ' + this.charaname + " was added.");    
+                } else {
+                    this.noChara();
+                    console.log("Couldn't add the character")
+                }
+              
+              
           },
           
           //CREATE PAIRING NAME
           pairingName: function(){
-              //var combo = '';
               if (this.selectedOne < this.selectedTwo){
                   this.pairingCode = this.selectedOne.concat(this.selectedTwo)
                   console.log(this.pairingCode)
-                  //combo = this.characterID.concat(this.secondID);
-                  //this.$store.commit("nimeaPairing", combo);
               } else {
                   this.pairingCode = this.selectedTwo.concat(this.selectedOne)
                   console.log(this.pairingCode)
-                  //combo = this.secondID.concat(this.characterID);
-                  //this.$store.commit("nimeaPairing", combo);
               }
           },
         //DOES PAIRING EXIST ALREADY? IF NOT COMMIT CHANGES.
           realityCheck: function(){
-             //console.log('RealityCheck' + this.$store.getters.pairings.length)
-             
              var i = 0;
              var permission = true;
               
              for (i = 0; i < this.$store.getters.pairings.length; i++) {
-                //console.log(i + ". " +  this.$store.getters.pairings[i].code + " " + this.pairingCode);
                 
                 if (this.pairingCode == this.$store.getters.pairings[i].code) {
-                    //console.log('It exists already :o');
                     permission = false;
+                    this.noEnding();
                     break; 
                 }
              }
@@ -141,33 +136,32 @@
                  this.$store.commit('ADD_ENDING', {code: this.pairingCode, ending: this.ending});
                  console.log(this.$store.getters.pairings);
 
-                                  
-                 //personal data
                  var e = 0;
-                 //var counter = 0;
-                 
                  for (e = 0; e < this.$store.getters.characters.length; e++){
                      console.log(e + "." + this.selectedOne + " = " + this.$store.getters.characters[e].code);
                      this.findProperNamesOne();
                      this.findProperNamesTwo();
                     
-                     //EKAN TYYPPIN                  
+                     //EKAN TYYPIN NIMI                  
                      if (this.selectedOne == this.$store.getters.characters[e].code) {
                          console.log("SAME HAT! " + e)
                          
                          this.$store.commit('ADD_PAIR_INDEX', e);
                          this.$store.commit('ADD_PAIR', {code: this.selectedTwo, name: this.$store.getters.formalnameTwo});
+                         this.charapairSorter();
                      }                          
-                     //TOKAN TYYPIN
+                     //TOKAN TYYPIN NIMI
                      else if (this.selectedTwo == this.$store.getters.characters[e].code) {
                          console.log("SAME HAT! " + e)
                          
                          this.$store.commit('ADD_PAIR_INDEX', e);
                          this.$store.commit('ADD_PAIR', {code: this.selectedOne, name: this.$store.getters.formalnameOne});
+                         this.charapairSorter();
                      } 
                  }
-                 this.charapairSorter();
-                 console.log(this.$store.getters.characters);
+                 this.confirmEnding();
+                 //this.charapairSorter();
+                 //console.log(this.$store.getters.characters);
              } else {
                  console.log("Can't add the pair");
              }
@@ -202,6 +196,25 @@
                   this.$store.commit('setFormalTwo', this.$store.getters.characters[counter].name);
                   console.log(this.$store.getters.formalnameTwo);
           },
+          
+          //CONFIRM ADDITIONS
+          confirmChara: function(){ 
+            var chadiv = document.getElementById('confirmChara');
+            chadiv.innerHTML += "Character added <br/>";   
+          },
+          noChara: function(){
+            var chadiv = document.getElementById('confirmChara');
+            chadiv.innerHTML += "Couldn't add the character (the name or code exists already) <br/>";   
+          },
+          
+          confirmEnding: function(){  
+            var enddiv = document.getElementById('confirmEnding');
+            enddiv.innerHTML += 'Ending added <br/>';
+          },
+          noEnding: function(){
+            var enddiv = document.getElementById('confirmEnding');
+            enddiv.innerHTML += "Couldn't add the ending (it exists already)<br/>";   
+          }
       },
 }
 </script>
@@ -218,5 +231,43 @@
     background: #c9c9c9;
     padding: 5px 10px;
     cursor:pointer;
+}
+    
+textarea {
+  width: 40%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  resize: none;
+}
+    
+select {
+  padding: 16px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #dddddd;
+}
+    
+input {
+  width: 20%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #66c066;
+  border: none;
+  padding: 15px 32px;
+  margin: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  float: center;
 }
 </style>
