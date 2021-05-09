@@ -3,9 +3,11 @@
     <h1>Make Additions</h1>
         <router-link :to="{ name: 'Pairings'}" tag="button" class="backbutton">Back</router-link>
     <h2>Add New Character</h2>
-      <input v-model="charaname" placeholder="name" style="margin-right: 10px;">
-      <input v-model="characode" placeholder="code"><br/>
-      <button v-on:click="createCharacter()" style="margin-top: 5px;">Add New Character</button>
+      <p>Write new character's name and a code to appear in the url.<br/> <i>E.g. Felix / felix, Byleth (F) / byleth_f</i></p>
+        <input v-model="charaname" placeholder="Name" @keyup.enter="createCharacter()"><br/>
+        <input v-model="characode" placeholder="code" @keyup.enter="createCharacter()"><br/>
+        
+        <button v-on:click="createCharacter()" style="margin-top: 5px;" id="charabutton">Add New Character</button>
       <div id="confirmChara"></div>
       <br/>
       <br/>
@@ -214,7 +216,7 @@
           noEnding: function(){
             var enddiv = document.getElementById('confirmEnding');
             enddiv.innerHTML += "Couldn't add the ending (it exists already)<br/>";   
-          }
+          },
       },
 }
 </script>
@@ -252,10 +254,11 @@ select {
 }
     
 input {
-  width: 20%;
+  width: 35%;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
+  text-align: center;
 }
 
 button {
